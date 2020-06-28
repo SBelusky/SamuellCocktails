@@ -9,6 +9,7 @@ public class SamuellCocktailsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SamuellCocktailsApplication.class, args);
 		System.out.println("cau");
+		System.out.println("skap");
 	}
 
 }
