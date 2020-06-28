@@ -20,6 +20,5 @@ public class TCocktailXIngredient implements Serializable {
     private TIngredient ingredient;
 
     public TCocktailXIngredient() {
-        super();
     }
 }
