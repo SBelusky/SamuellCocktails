@@ -720,35 +720,36 @@ public class Drink {
     public Map<String,String> getListOfIngr(){
         Map<String,String> list = new LinkedHashMap<>();
         if(!(this.strIngredient1 == null))
-            list.put(this.getStrIngredient1(),this.getStrMeasure1()==null?"not specified":this.getStrMeasure1().toString());
+            list.put(this.getStrIngredient1()==null?"not specified":this.getStrIngredient1().toString(),this.getStrMeasure1()==null?"not specified":this.getStrMeasure1().toString());
         if(!(this.strIngredient2 == null))
-            list.put(this.getStrIngredient2(),this.getStrMeasure2()==null?"not specified":this.getStrMeasure2().toString());
+            list.put(this.getStrIngredient2()==null?"not specified":this.getStrIngredient2().toString(),this.getStrMeasure2()==null?"not specified":this.getStrMeasure2().toString());
         if(!(this.strIngredient3 == null))
-            list.put(this.getStrIngredient3(),this.getStrMeasure3()==null?"not specified":this.getStrMeasure3().toString());
+            list.put(this.getStrIngredient3()==null?"not specified":this.getStrIngredient3().toString(),this.getStrMeasure3()==null?"not specified":this.getStrMeasure3().toString());
         if(!(this.strIngredient4 == null))
-            list.put(this.getStrIngredient4(),this.getStrMeasure4()==null?"not specified":this.getStrMeasure4().toString());
+            list.put(this.getStrIngredient4()==null?"not specified":this.getStrIngredient4().toString(),this.getStrMeasure4()==null?"not specified":this.getStrMeasure4().toString());
         if(!(this.strIngredient5 == null))
-            list.put(this.getStrIngredient5().toString(),this.getStrMeasure5()==null?"not specified":this.getStrMeasure5().toString());
+            list.put(this.getStrIngredient5()==null?"not specified":this.getStrIngredient5().toString(),this.getStrMeasure5()==null?"not specified":this.getStrMeasure5().toString());
         if(!(this.strIngredient6 == null))
-            list.put(this.getStrIngredient6().toString(),this.getStrMeasure6()==null?"not specified":this.getStrMeasure6().toString());
+            list.put(this.getStrIngredient6()==null?"not specified":this.getStrIngredient6().toString(),this.getStrMeasure6()==null?"not specified":this.getStrMeasure6().toString());
         if(!(this.strIngredient7 == null))
-            list.put(this.getStrIngredient7().toString(),this.getStrMeasure7()==null?"not specified":this.getStrMeasure7().toString());
+            list.put(this.getStrIngredient7()==null?"not specified":this.getStrIngredient7().toString(),this.getStrMeasure7()==null?"not specified":this.getStrMeasure7().toString());
         if(!(this.strIngredient8 == null))
-            list.put(this.getStrIngredient8().toString(),this.getStrMeasure8()==null?"not specified":this.getStrMeasure8().toString());
+            list.put(this.getStrIngredient8()==null?"not specified":this.getStrIngredient8().toString(),this.getStrMeasure8()==null?"not specified":this.getStrMeasure8().toString());
         if(!(this.strIngredient9 == null))
-            list.put(this.getStrIngredient9().toString(),this.getStrMeasure9()==null?"not specified":this.getStrMeasure9().toString());
+            list.put(this.getStrIngredient9()==null?"not specified":this.getStrIngredient9().toString(),this.getStrMeasure9()==null?"not specified":this.getStrMeasure9().toString());
         if(!(this.strIngredient10 == null))
-            list.put(this.getStrIngredient10().toString(),this.getStrMeasure10()==null?"not specified":this.getStrMeasure10().toString());
+            list.put(this.getStrIngredient10()==null?"not specified":this.getStrIngredient10().toString(),this.getStrMeasure10()==null?"not specified":this.getStrMeasure10().toString());
         if(!(this.strIngredient11 == null))
-            list.put(this.getStrIngredient11().toString(),this.getStrMeasure11()==null?"not specified":this.getStrMeasure11().toString());
+            list.put(this.getStrIngredient11()==null?"not specified":this.getStrIngredient11().toString(),this.getStrMeasure11()==null?"not specified":this.getStrMeasure11().toString());
         if(!(this.strIngredient12 == null))
-            list.put(this.getStrIngredient12().toString(),this.getStrMeasure12()==null?"not specified":this.getStrMeasure12().toString());
+            list.put(this.getStrIngredient12()==null?"not specified":this.getStrIngredient12().toString(),this.getStrMeasure12()==null?"not specified":this.getStrMeasure12().toString());
         if(!(this.strIngredient13 == null))
-            list.put(this.getStrIngredient13().toString(),this.getStrMeasure13()==null?"not specified":this.getStrMeasure13().toString());
+            list.put(this.getStrIngredient13()==null?"not specified":this.getStrIngredient13().toString(),this.getStrMeasure13()==null?"not specified":this.getStrMeasure13().toString());
         if(!(this.strIngredient14 == null))
-            list.put(this.getStrIngredient14().toString(),this.getStrMeasure14()==null?"not specified":this.getStrMeasure14().toString());
+            list.put(this.getStrIngredient14()==null?"not specified":this.getStrIngredient14().toString(),this.getStrMeasure14()==null?"not specified":this.getStrMeasure14().toString());
         if(!(this.strIngredient15 == null))
-            list.put(this.getStrIngredient15().toString(),this.getStrMeasure15()==null?"not specified":this.getStrMeasure15().toString());
+            list.put(this.getStrIngredient15()==null?"not specified":this.getStrIngredient15().toString(),this.getStrMeasure15()==null?"not specified":this.getStrMeasure15().toString());
+
         return list;
     }
 
