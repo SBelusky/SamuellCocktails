@@ -1,24 +1,21 @@
-package com.samuellcocktails.app.generate_sql_scripts;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.samuellcocktails.app.generate_sql_scripts.pojo_models.Drink;
-
+import pojo_models.Drink;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 public class Generator {
-    //nasetovanie objektov z JSON-u
+    //nasetovanie objektov (triedy Drink, Users) z JSON-u
     private static List<Drink> jsonToObject(Integer[] idcka, List<Drink> drinkList) throws IOException {
         String url_string;
         String inputLine;
         StringBuffer content = new StringBuffer();
 
-        System.out.println("-> Generating objects from API response");
+        System.out.println("------------------\n-> Generating objects from API response");
 
-        for (int i = 0; i < idcka.length; i++) {
-            url_string = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + idcka[i];
+        for (Integer integer : idcka) {
+            url_string = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + integer;
             URL url = new URL(url_string);
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -30,8 +27,8 @@ public class Generator {
                 content.append(inputLine);
             }
 
-            content = content.delete(0, 11);
-            content = content.delete(content.length() - 2, content.length());
+            content.delete(0, 11);
+            content.delete(content.length() - 2, content.length());
 
             //nasetovanie objektov z JSON prestredníctvom JACKSON-u
             ObjectMapper mapper = new ObjectMapper();
@@ -41,19 +38,18 @@ public class Generator {
             content = new StringBuffer();
         }
 
-        System.out.println("-> Object generating successful");
+        System.out.println("-> Object generating successful\n------------------");
         return drinkList;
     }
 
     //vygenerovanie skriptu pre naplnenie tabuľky co.t_ingredients
-    private static void generateInsertScriptForIngredients(Integer[] idcka, List<Drink> drinkList) throws IOException {
-        String file = "D:\\Programovanie\\Tvorba Java aplikácie KURZ\\SamuellCocktails\\src\\main\\java\\com\\samuellcocktails\\app\\sql_scripts\\02-feed-t_ingredients.sql";
+    private static void generateInsertScriptForIngredients(Integer[] idcka, List<Drink> drinkList) {
+        String file = "D:\\Programovanie\\Tvorba Java aplikácie KURZ\\SamuellCocktails\\sql_scripts\\02-feed-t_ingredients.sql";
         Set<String> allIngredients = new HashSet<>();
         Map<String, String> zoznamIng;
         StringBuilder builder= new StringBuilder();
 
-        System.out.println("-> Generating SQL script for table co.t_ingredients");
-
+        System.out.println("------------------\n-> Generating SQL script for table co.t_ingredients");
 
         for (int i = 0; i < idcka.length; i++) {
             zoznamIng = drinkList.get(i).getListOfIngr();
@@ -61,17 +57,17 @@ public class Generator {
             for (Map.Entry<String, String> entry : zoznamIng.entrySet())
                 allIngredients.add("INSERT INTO co.t_ingredients (name) VALUES ('" + (entry.getKey().isEmpty() ? "not specified" : entry.getKey().toLowerCase()) + "');\n");
         }
-        builder.append(allIngredients.toString());
+        builder.append(allIngredients.toString().replaceAll("[\\[\\]]","").replaceAll(",",""));
         WriteToFile(file,builder);
 
     }
 
     //vygenerovanie skriptu pre naplnenie tabuľky co.t_cocktails
-    private static void generateInsertScriptForCocktails(Integer[] idcka, List<Drink> drinkList) throws IOException {
+    private static void generateInsertScriptForCocktails(Integer[] idcka, List<Drink> drinkList){
         StringBuilder allCocktails= new StringBuilder();
-        String file = "D:\\Programovanie\\Tvorba Java aplikácie KURZ\\SamuellCocktails\\src\\main\\java\\com\\samuellcocktails\\app\\sql_scripts\\03-feed-t_cocktails.sql";
+        String file = "D:\\Programovanie\\Tvorba Java aplikácie KURZ\\SamuellCocktails\\sql_scripts\\03-feed-t_cocktails.sql";
 
-        System.out.println("-> Generating SQL script for table co.t_cocktails");
+        System.out.println("------------------\n-> Generating SQL script for table co.t_cocktails");
 
         for (int i = 0; i < idcka.length; i++) {
             allCocktails.append("INSERT INTO co.t_cocktails (instructions, name, url) VALUES" +
@@ -84,12 +80,12 @@ public class Generator {
     }
 
     //vygenerovanie skriptu pre naplnenie tabuľky co.t_cocktails
-    private static void generateInsertScriptForCocktailsXIngredients(Integer[] idcka, List<Drink> drinkList) throws IOException {
+    private static void generateInsertScriptForCocktailsXIngredients(Integer[] idcka, List<Drink> drinkList){
         StringBuilder krizovaTabulka= new StringBuilder();
         Map<String, String> zoznamIng;
-        String file = "D:\\Programovanie\\Tvorba Java aplikácie KURZ\\SamuellCocktails\\src\\main\\java\\com\\samuellcocktails\\app\\sql_scripts\\04-feed-coctail-x-ingredient.sql";
+        String file = "D:\\Programovanie\\Tvorba Java aplikácie KURZ\\SamuellCocktails\\sql_scripts\\04-feed-coctail-x-ingredient.sql";
 
-        System.out.println("-> Generating SQL script for table co.t_cocktails_x_ingredients");
+        System.out.println("------------------\n-> Generating SQL script for table co.t_cocktails_x_ingredients");
 
         for (int i = 0; i < idcka.length; i++) {
             zoznamIng = drinkList.get(i).getListOfIngr();
@@ -97,7 +93,7 @@ public class Generator {
             for (Map.Entry<String, String> entry : zoznamIng.entrySet()) {
                 krizovaTabulka.append("Insert into co.t_cocktails_x_ingredients (cocktail_id,ingredient_id,measure) " +
                         "values ((Select cocktail_id from co.t_cocktails where name='" + (drinkList.get(i).getStrDrink().replaceAll("[<(\\[{^\\-=$!|\\]})?*+'\\n\\r]", "").trim()) + "')," +
-                        "(Select ingredient_id from co.t_ingredients where name='" + (entry.getKey() == "" ? "not specified" : entry.getKey().toLowerCase().trim()) + "')," +
+                        "(Select ingredient_id from co.t_ingredients where name='" + (entry.getKey().equals("") ? "not specified" : entry.getKey().toLowerCase().trim()) + "')," +
                         "'" + (entry.getValue().equals("") ? "not specified" : entry.getValue().toLowerCase().trim()) + "');\n");
 
             }
@@ -106,16 +102,16 @@ public class Generator {
     }
 
     //zápis scriptu do súboru
-    private static void WriteToFile(String filename,StringBuilder script) throws IOException {
+    private static void WriteToFile(String filename,StringBuilder script) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
             writer.write(script.toString());
             writer.close();
             System.out.println("Print to file - SUCCESS");
-            System.out.println("Generate file in path: " + filename);
+            System.out.println("Generate file in path: " + filename +"\n------------------");
         }
         catch (Exception e){
-            System.out.println("Error while print into file");
+            System.out.println("Error while print into file\n------------------");
         }
 
 
@@ -129,13 +125,13 @@ public class Generator {
         Scanner myObj = new Scanner(System.in);
         String answer="y";
 
-        drinkList = jsonToObject(idcka, drinkList);
+        jsonToObject(idcka, drinkList);
 
         while (answer.toLowerCase().equals("y")){
-            System.out.print("Script generator{a - ingredients, b - cocktails, c - cocktails_x_ingredients}: ");
+            System.out.print("Script generator, choose for genereta {a - ingredients, b - cocktails, c - cocktails_x_ingredients}: ");
             answer = myObj.nextLine();
 
-            switch (answer){
+            switch (answer.toLowerCase()){
                 case "a":
                     generateInsertScriptForIngredients(idcka,drinkList);break;
                 case "b":
@@ -145,15 +141,20 @@ public class Generator {
                 default:
                     System.out.println("Invalid input !!!");break;
             }
-            System.out.print("Work again?(Y/N): ");
-            answer = myObj.nextLine();
 
-            if(answer.toLowerCase().equals("n"))
-                break;
-            else if(!answer.toLowerCase().equals("y"))
-                System.out.println("Invalid inpur");
-            else
+            if (!answer.toLowerCase().matches("[abc]")){
+                answer = "y";
                 continue;
+            }
+            answer = "q";
+
+            while(!answer.toLowerCase().matches("[yn]")) {
+                System.out.print("Work again?(Y/N): ");
+                answer = myObj.nextLine();
+
+                if (!answer.toLowerCase().matches("[yn]"))
+                    System.out.println("Invalid imput");
+            }
         }
         System.out.print("------------------\nSQL script generator for DB tables \nBy: Samuell Belusky\n------------------");
     }

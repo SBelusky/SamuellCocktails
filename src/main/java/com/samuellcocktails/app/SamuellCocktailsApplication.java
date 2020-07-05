@@ -1,5 +1,6 @@
 package com.samuellcocktails.app;
 
+import com.samuellcocktails.app.model.TCocktail;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

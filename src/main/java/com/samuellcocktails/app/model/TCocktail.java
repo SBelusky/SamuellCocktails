@@ -6,10 +6,12 @@ import java.io.Serializable;
 @Entity
 @Table(name="t_cocktails", schema = "co")
 public class TCocktail implements Serializable {
-    //@SequenceGenerator nám hovorí o použití sequencera z DB pre nastavovanie hodnoty "cocktail_id"
+    /*@SequenceGenerator nám hovorí o použití sequencera z DB pre nastavovanie hodnoty "cocktail_id"
+    nevyužil som ho nakoľok som nenapĺňal DB cez entityManagera ale vygenerovaním scriptov
+    @GeneratedValue neni treba lebo stránka nebude pridávať ďalšie záznamy do DB*/
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_cocktails_seq")
-    @SequenceGenerator(name = "t_cocktails_seq", sequenceName = "co.t_cocktails_cocktail_id_seq", allocationSize = 1, initialValue = 0)
+    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_cocktails_seq")
+    @SequenceGenerator(name = "t_cocktails_seq", sequenceName = "co.t_cocktails_cocktail_id_seq", allocationSize = 1, initialValue = 0)*/
     @Column(name = "cocktail_id", nullable = false)
     private Long cocktailId;
 
@@ -19,8 +21,19 @@ public class TCocktail implements Serializable {
     @Column(name = "url", nullable = false)
     private String url;
 
+    @Column(name = "instructions")
+    private String instructions;
+
     public TCocktail() {
         super();
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     public Long getCocktailId() {

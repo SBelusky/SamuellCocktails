@@ -1,5 +1,4 @@
-
-package com.samuellcocktails.app.generate_sql_scripts.pojo_models;
+package pojo_models;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.samuellcocktails.app.generate_sql_scripts.pojo_models.Drink;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -21,7 +19,7 @@ public class Users {
     @JsonProperty("drinks")
     private List<Drink> drinks = null;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
     @JsonProperty("drinks")
     public List<Drink> getDrinks() {
