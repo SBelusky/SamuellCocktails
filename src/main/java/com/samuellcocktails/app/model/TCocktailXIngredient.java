@@ -6,22 +6,25 @@ import java.io.Serializable;
 @Entity
 @Table(name="t_cocktails_x_ingredients", schema = "co")
 public class TCocktailXIngredient implements Serializable {
-    /*Nevyužívam entitymanagera - genereuj script pre DB
-    @EmbeddedId
-    private CocktailIngredientId id;*/
+    private static final long serialVersionUID = 1636471273022502864L;
 
-    @ManyToMany
+    //káždá trieda musí mať neaký atribút označený ako @Id
+    @EmbeddedId
+    private CocktailIngredientId id;
+
+    @ManyToOne
     /*@MapsId - aký atribút z triedy cocktail representuje stĺpec cocktail_id v tabuľke t_cocktails_x_ingredients v DB*/
     @MapsId("cocktailId")
     @JoinColumn(name="cocktail_id", nullable = false)
     private TCocktail cocktail;
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("ingredientId")
     @JoinColumn(name="ingredient_id", nullable = false)
     private TIngredient ingredient;
 
-    @Column(name = "measure")
+
+    //@Column(name = "measure")
     private String measure;
 
     public TCocktail getCocktail() {

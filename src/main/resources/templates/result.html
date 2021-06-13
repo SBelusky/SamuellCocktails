@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="lc-body">
+    <div class="container-fluid">
+        <div class="row navbar">
+            <i class="fas fa-cocktail"></i>
+            <p>iCoctails</p>
+        </div>
+        <div class="row h-25 mar-auto">
+
+            <button class="button" onclick="location.href='/ingredients'">Back</button>
+            <h1 class="">You can make these coctails...</h1>
+        </div>
+
+        <div class="row h-50">
+            <div class="col-1">&nbsp</div>
+            <div class="col-10">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="thText">Name</th>
+                        <th scope="col" class="thText">Match</th>
+                        <th scope="col" class="thText">Recipe</th>
+                        <th scope="col" class="thText">Image</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cocktailMatchModel : ${matches}">
+                      <td class="resultItem"><span th:text="${cocktailMatchModel.cocktailName}" style="font-weight: bold;"></span></td>
+                        <td class="resultItem"><span th:text="${cocktailMatchModel.percentageMatch}"></span></td>
+                        <td class="resultItem"><a th:href="@{'https://www.google.com/search?q=' + ${cocktailMatchModel.cocktailName} + ' recipe'}"><i class="fas fa-external-link-alt mr-2"></i>Link</a></td>
+                        <td class="resultItem w-25"><span><img th:src="${cocktailMatchModel.url}" class="w-50" target="_blank"/></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1">&nbsp;</div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-a11y="true"></script>
+</body>
+</html>

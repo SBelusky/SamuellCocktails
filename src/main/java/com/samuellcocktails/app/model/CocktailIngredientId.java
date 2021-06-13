@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 //označuje pre zložené objekty alebo veci :D asi
 //lebo id pre riadok v spojitej tabuľke bude zložený z dvoch FK
-//nevyužité lebo som použil generátor SQL scriptu pre napĺňanie DB
 @Embeddable
 public class CocktailIngredientId implements Serializable {
     @Column(name = "cocktail_id", nullable = false)
