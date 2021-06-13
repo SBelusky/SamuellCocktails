@@ -1,3 +1,8 @@
+/* title*/
+.main-title{
+font-family: 'Kaushan Script', cursive;
+font-size:5em !important;
+}
 /* SEARCH FIELD*/
 #search {
 	margin-top: 10px; /* outside */
@@ -68,27 +73,26 @@ height: 30px;
 .ingredient-item span{
     margin-top:2px;
     display: block;
-     overflow:hidden;
-     white-space:nowrap;
-     text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+li:hover{
+background-color: rgba(232,172,114,0.6);
 }
 .thText {
 	color: #4D392F;
 	font-size: 1.25em;
 }
-/* unvisited link */
 a:link {
   color: #4D392F;
 }
-/* visited link */
 a:visited {
   color: #4D392F;
 }
-/* mouse over link */
 a:hover {
   color: #4D392F;
 }
-/* selected link */
 a:active {
   color: #e8ac72;
 }
@@ -115,18 +119,22 @@ margin-top:25px;
 }
 
 /* RESULT TABLE*/
+.table{
+margin-top:2em;
+}
 tbody{
 background-color:white;
 }
 .resultItem{
-font-size:1.5em;
+font-size:1.2em;
 }
 .result-title{
 margin:auto;
 text-align:center;
-margin-top: 25px;
 }
-
+.result-title{
+    text-align:center;
+}
 /* OTHER */
 .form-control{
 background-color:white;
@@ -145,6 +153,6 @@ background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
     justify-content: center;
     margin-top:25px;
 }
-.mar-auto .button{
+/*.mar-auto .button{
 margin-right:25px;
-}
+}*/
